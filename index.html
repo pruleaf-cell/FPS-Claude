@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOOM-Style FPS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Title Screen -->
+  <div id="title-screen">
+    <h1>SHADOW<span>STRIKE</span></h1>
+    <p class="subtitle">A First Person Shooter</p>
+    <div class="instructions">
+      <p><strong>WASD</strong> - Move &nbsp; <strong>Mouse</strong> - Look</p>
+      <p><strong>Left Click</strong> - Shoot &nbsp; <strong>R</strong> - Reload</p>
+      <p><strong>1/2/3</strong> - Switch Weapons &nbsp; <strong>E</strong> - Open Doors</p>
+    </div>
+    <button id="start-btn" onclick="startGame()">CLICK TO PLAY</button>
+    <p class="hint">Game captures mouse on start</p>
+  </div>
+
+  <!-- Game Canvas -->
+  <canvas id="game-canvas"></canvas>
+
+  <!-- HUD Overlay -->
+  <div id="hud" class="hidden">
+    <div id="crosshair">+</div>
+
+    <div id="hud-bottom">
+      <div id="health-section">
+        <div class="hud-label">HEALTH</div>
+        <div id="health-bar-outer">
+          <div id="health-bar-inner"></div>
+        </div>
+        <div id="health-text">100</div>
+      </div>
+
+      <div id="weapon-section">
+        <div id="weapon-name">PISTOL</div>
+        <div id="ammo-text"><span id="ammo-current">12</span> / <span id="ammo-reserve">48</span></div>
+      </div>
+
+      <div id="score-section">
+        <div class="hud-label">SCORE</div>
+        <div id="score-text">0</div>
+        <div class="hud-label">KILLS</div>
+        <div id="kills-text">0</div>
+      </div>
+    </div>
+
+    <div id="damage-overlay"></div>
+    <div id="message-display"></div>
+    <div id="wave-display" class="hidden"></div>
+  </div>
+
+  <!-- Death Screen -->
+  <div id="death-screen" class="hidden">
+    <h1>YOU DIED</h1>
+    <p>Score: <span id="final-score">0</span></p>
+    <p>Kills: <span id="final-kills">0</span></p>
+    <button onclick="restartGame()">TRY AGAIN</button>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

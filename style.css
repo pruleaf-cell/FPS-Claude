@@ -1,0 +1,269 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  overflow: hidden;
+  font-family: 'Courier New', monospace;
+  color: #fff;
+  cursor: none;
+}
+
+/* Title Screen */
+#title-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a0000 50%, #0a0a0a 100%);
+  z-index: 100;
+}
+
+#title-screen h1 {
+  font-size: 5rem;
+  letter-spacing: 0.3em;
+  color: #aaa;
+  text-shadow: 0 0 20px rgba(255, 50, 50, 0.5);
+}
+
+#title-screen h1 span {
+  color: #ff3333;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 0.5rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+}
+
+.instructions {
+  margin-top: 3rem;
+  text-align: center;
+  color: #888;
+  line-height: 2;
+}
+
+.instructions strong {
+  color: #ff5555;
+}
+
+#start-btn {
+  margin-top: 3rem;
+  padding: 1rem 3rem;
+  font-family: 'Courier New', monospace;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  background: #aa0000;
+  border: 2px solid #ff3333;
+  cursor: pointer;
+  letter-spacing: 0.2em;
+  transition: all 0.2s;
+}
+
+#start-btn:hover {
+  background: #cc0000;
+  box-shadow: 0 0 30px rgba(255, 50, 50, 0.5);
+}
+
+.hint {
+  margin-top: 1rem;
+  color: #555;
+  font-size: 0.8rem;
+}
+
+/* Canvas */
+#game-canvas {
+  display: block;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* HUD */
+#hud {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#hud.hidden, .hidden {
+  display: none !important;
+}
+
+#crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 4px rgba(0,0,0,0.8);
+  user-select: none;
+}
+
+#hud-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+}
+
+#health-section, #score-section {
+  min-width: 160px;
+}
+
+.hud-label {
+  font-size: 0.7rem;
+  color: #888;
+  letter-spacing: 0.2em;
+  margin-bottom: 0.3rem;
+}
+
+#health-bar-outer {
+  width: 160px;
+  height: 12px;
+  background: #333;
+  border: 1px solid #555;
+}
+
+#health-bar-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff0000, #00ff00);
+  transition: width 0.3s;
+}
+
+#health-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0f0;
+}
+
+#weapon-section {
+  text-align: center;
+}
+
+#weapon-name {
+  font-size: 1rem;
+  color: #ff5555;
+  letter-spacing: 0.2em;
+}
+
+#ammo-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+#ammo-current {
+  color: #fff;
+}
+
+#ammo-reserve {
+  color: #888;
+  font-size: 1.5rem;
+}
+
+#score-section {
+  text-align: right;
+}
+
+#score-text, #kills-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffcc00;
+}
+
+#damage-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(255,0,0,0.4));
+  opacity: 0;
+  transition: opacity 0.1s;
+  pointer-events: none;
+}
+
+#message-display {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  color: #ff5555;
+  text-shadow: 0 0 10px rgba(255,0,0,0.5);
+  opacity: 0;
+  transition: opacity 0.3s;
+  text-align: center;
+}
+
+#wave-display {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ff3333;
+  text-shadow: 0 0 30px rgba(255,0,0,0.8);
+  letter-spacing: 0.3em;
+}
+
+/* Death screen */
+#death-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(100, 0, 0, 0.85);
+  z-index: 200;
+}
+
+#death-screen h1 {
+  font-size: 5rem;
+  color: #ff0000;
+  text-shadow: 0 0 40px rgba(255,0,0,0.8);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+#death-screen p {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  color: #ccc;
+}
+
+#death-screen button {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  color: #fff;
+  background: #880000;
+  border: 2px solid #ff3333;
+  cursor: pointer;
+  letter-spacing: 0.2em;
+}
+
+#death-screen button:hover {
+  background: #aa0000;
+}
